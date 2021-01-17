@@ -1,0 +1,11 @@
+const actionTypes = {
+  SEARCH_DATA: "SEARCH_DATA",
+  LOAD_DATA: "LOAD_DATA",
+  EDIT_DATA: "EDIT_DATA",
+  LIKE_DATA: "LIKE_DATA",
+  UNLIKE_DATA: "UNLIKE_DATA",
+  REMOVE_DATA: "REMOVE_DATA",
+  UNREMOVE_DATA: "UNREMOVE_DATA",
+};
+
+export default actionTypes;
