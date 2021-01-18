@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import dataStore from "../stores/dataStore";
 import {loadData,updateData} from '../actions/dataActions';
 import EditForm from './common/EditForm';
+import { useHistory } from 'react-router-dom';
 import './styles/ManageData.scss';
 
 const ManageData = props => {
@@ -10,6 +11,7 @@ const ManageData = props => {
   const [data, setData] = useState({});
   const [image, setImage] = useState({});
   const [isBusy, setBusy] = useState(true);
+  const history = useHistory();
 
   useEffect(()=>{
     dataStore.addChangeListener(onChange);
@@ -54,6 +56,11 @@ const ManageData = props => {
     event.preventDefault();
     if(!formIsValid()) return;
     updateData(data);
+    handleBack();
+  }
+
+  function handleBack(){
+    history.push('/data');
   }
 
   return (
@@ -72,6 +79,9 @@ const ManageData = props => {
             </div>
           </div>
           <div className="flex-form">
+          <br />
+          <button onClick={handleBack}>Back</button>
+          <br /><br />
           <h2>Edit Data</h2>
           <EditForm
             errors={errors}

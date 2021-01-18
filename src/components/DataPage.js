@@ -27,6 +27,7 @@ function DataPage(){
 
   return (
     <>
+      <h2>All Data</h2>
       {!isBusy ? (
         <DataList collection={collection} />
       ) : <div>Loading</div> }
