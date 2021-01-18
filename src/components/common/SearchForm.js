@@ -11,8 +11,9 @@ export function SearchForm(){
   }
   const handleSubmit = (e)=>{
     e.preventDefault();
-    searchApi(value);
-    history.push('/data');
+    searchApi(value).then(()=>{
+      history.push('/data');
+    });
   }
 
   return (

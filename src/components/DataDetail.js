@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 import './styles/DataDetail.scss';
+import LikeButton from './common/likeButton';
 
-const DataDetail = ({id,image,title}) => (
+const DataDetail = ({id,image,title,item}) => (
   <article className="GalleryItem">
     <Link className="GalleryItem-wrapper" to={`/detail/${id}`} title={title}>
       <div className="GalleryItem-imageWrapper">
@@ -18,6 +19,7 @@ const DataDetail = ({id,image,title}) => (
       </div>
       <p className="GalleryItem-title">{title}</p>
     </Link>
+    <LikeButton item={item}/>
   </article>
 );
 

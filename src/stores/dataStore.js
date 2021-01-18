@@ -19,16 +19,32 @@ class DataStore extends EventEmitter{
     this.emit(CHANGE_EVENT);
   }
 
-  emitLoad(){
-    this.emit(CHANGE_EVENT);
+  updateLocalStorage(){
+    let stringify = JSON.stringify(_collection);
+    localStorage.setItem("onepacTest",stringify);
   }
 
   getCollection() {
     return _collection;
   }
 
+  getLikedCollection(){
+    let _likedCollection = _collection;
+    _likedCollection.items = _likedCollection.items.filter((item) => {
+      if(item.data[0].like){
+        return item.data[0].like
+      }
+    })
+    return _likedCollection;
+  }
+
   getDataById(id) {
-    return _collection.find(data => data.id === id);
+    let test = _collection.items.find(item => item.data[0].nasa_id === id);
+    return test.data[0];
+  }
+  getImageById(id){
+    let test = _collection.items.find(item => item.data[0].nasa_id === id);
+    return test.links[0].href;
   }
 }
 
@@ -38,13 +54,34 @@ Dispatcher.register(action => {
   switch(action.actionTypes){
     case actionTypes.SEARCH_DATA:
       _collection = action.collection;
-      let stringify = JSON.stringify(_collection);
-      localStorage.setItem("onepacTest",stringify);
+      store.updateLocalStorage();
       store.emitChange();
       break;
     case actionTypes.LOAD_DATA:
       _collection = action.collection;
-      store.emitLoad();
+      store.emitChange();
+      break;
+    case actionTypes.EDIT_DATA:
+      _collection.items.forEach((item,index)=>{
+        if(item.data[0].nasa_id === action.item.nasa_id){
+          _collection.items[index].data[0] = action.item;
+        }
+      });
+      console.log(action.item)
+      store.updateLocalStorage();
+      store.emitChange();
+      break;
+    case actionTypes.LIKE_DATA:
+      console.log(action.item.nasa_id);
+      _collection.items.forEach((item,index)=>{
+        if(item.data[0].nasa_id === action.item.nasa_id){
+          console.log(_collection.items[index].data[0])
+          _collection.items[index].data[0] = action.item;
+          console.log(_collection.items[index].data[0])
+        }
+      });
+      store.updateLocalStorage();
+      store.emitChange();
       break;
     default:
   }

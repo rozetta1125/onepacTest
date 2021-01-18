@@ -6,9 +6,6 @@ import {loadData} from '../actions/dataActions';
 function DataPage(){
   const [collection, setCollection] = useState(dataStore.getCollection());
   const [isBusy, setBusy] = useState(true);
-  // useEffect(()=>{
-  //   loadData();
-  // },[]);
 
   useEffect(()=>{
     dataStore.addChangeListener(onChange);
@@ -20,9 +17,16 @@ function DataPage(){
     setCollection(dataStore.getCollection());
   }
 
+  // function getAllData(){
+
+  // }
+
+  // function getLikedData(){
+
+  // }
+
   return (
     <>
-      <h2>List</h2>
       {!isBusy ? (
         <DataList collection={collection} />
       ) : <div>Loading</div> }

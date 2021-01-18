@@ -13,10 +13,23 @@ export function searchApi(query) {
 
 export function loadData(){
   return nasaApi.getData().then(collection=>{
-    console.log(collection);
     dispatcher.dispatch({
       actionTypes: actionTypes.LOAD_DATA,
       collection: collection,
     })
+  })
+}
+
+export function updateData(item){
+  dispatcher.dispatch({
+    actionTypes: actionTypes.EDIT_DATA,
+    item: item,
+  })
+}
+
+export function likeData(item){
+  dispatcher.dispatch({
+    actionTypes: actionTypes.LIKE_DATA,
+    item: item,
   })
 }

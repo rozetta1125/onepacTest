@@ -10,7 +10,7 @@
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-decoration: none;
-
+  position: relative;
   transition-property: box-shadow;
   transition-duration: 200ms;
   // will-change: box-shadow, transform;
@@ -58,6 +58,15 @@
   max-height: 800px;
 
   animation: fadeIn 400ms ease-out;
+}
+
+.likeButton{
+  position: absolute;
+  right:5%;
+  bottom: 5%;
+  &.liked{
+    background:red;
+  }
 }
 
 @keyframes fadeIn {
