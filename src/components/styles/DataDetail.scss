@@ -19,6 +19,7 @@
     // transform: translate(0, -2px);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   }
+  $parent: &;
 }
 
 .GalleryItem-wrapper {
@@ -67,6 +68,13 @@
   &.liked{
     background:red;
   }
+}
+
+.removeButton{
+  position: absolute;
+  top:7%;
+  right: 5%;
+
 }
 
 @keyframes fadeIn {

@@ -1,7 +1,7 @@
 import React,{useEffect,useRef, useState} from 'react';
-import {likeData} from '../../actions/dataActions';
+import {removeData} from '../../actions/dataActions';
 
-export function LikeButton(item){
+export function RemoveButton(item){
   const [data,setData] = useState(item.item.data[0]);
 
   const firstUpdate = useRef(true);
@@ -11,28 +11,28 @@ export function LikeButton(item){
       firstUpdate.current = false;
       return;
     } else {
-      likeData(data);
+      removeData(data);
     }
   },[data]);
 
   function handleClick(){
-    if(!data.like){
-      console.log('liked')
-      setData({...data,like:true});
+    if(!data.remove){
+      console.log('remove')
+      setData({...data,remove:true});
     } else {
-      console.log('unliked')
-      setData({...data,like:false});
+      console.log('undo')
+      setData({...data,remove:false});
     }
   }
 
   return(
     <button 
-      className={"likeButton " + (data.like ? 'liked' : 'unliked')} 
+      className={"removeButton " + (data.remove ? 'removed' : '')} 
       onClick={handleClick}
     >
-      Like
+      {(!data.remove ? 'X' : 'Undo')}
     </button>
   )
 }
 
-export default LikeButton;
+export default RemoveButton;

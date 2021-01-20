@@ -5,13 +5,30 @@ import Masonry from 'react-masonry-css'
 
 
 function DataList(props){
-  console.log(props)
+  console.log(props.filter,props.type)
+  let FilterArray=[];
+  switch (props.type) {
+    case 'LIKED':
+      FilterArray = props.collection.items.filter(item => {
+        return item.data[0].like&&!item.data[0].remove
+      });
+      break;
+    case 'REMOVED':
+      FilterArray = props.collection.items.filter(item => {
+        return item.data[0].remove
+      });
+      break;
+    default:
+      FilterArray = props.collection.items;
+      break;
+  }
+
   return (
     <>
     <Masonry breakpointCols={3}
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column">
-      {props.collection.items.map((item) => 
+      {FilterArray.map((item) => 
       {
         return (
           <DataDetail

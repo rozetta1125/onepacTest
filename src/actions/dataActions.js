@@ -33,3 +33,10 @@ export function likeData(item){
     item: item,
   })
 }
+
+export function removeData(item){
+  dispatcher.dispatch({
+    actionTypes: actionTypes.REMOVE_DATA,
+    item: item,
+  })
+}

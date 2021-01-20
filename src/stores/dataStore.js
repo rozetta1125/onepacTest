@@ -28,16 +28,6 @@ class DataStore extends EventEmitter{
     return _collection;
   }
 
-  getLikedCollection(){
-    let _likedCollection = _collection;
-    _likedCollection.items = _likedCollection.items.filter((item) => {
-      if(item.data[0].like){
-        return item.data[0].like
-      }
-    })
-    return _likedCollection;
-  }
-
   getDataById(id) {
     let test = _collection.items.find(item => item.data[0].nasa_id === id);
     return test.data[0];
@@ -67,11 +57,19 @@ Dispatcher.register(action => {
           _collection.items[index].data[0] = action.item;
         }
       });
-      console.log(action.item)
       store.updateLocalStorage();
       store.emitChange();
       break;
     case actionTypes.LIKE_DATA:
+      _collection.items.forEach((item,index)=>{
+        if(item.data[0].nasa_id === action.item.nasa_id){
+          _collection.items[index].data[0] = action.item;
+        }
+      });
+      store.updateLocalStorage();
+      store.emitChange();
+      break;
+    case actionTypes.REMOVE_DATA:
       console.log(action.item.nasa_id);
       _collection.items.forEach((item,index)=>{
         if(item.data[0].nasa_id === action.item.nasa_id){

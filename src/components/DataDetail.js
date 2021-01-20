@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 import './styles/DataDetail.scss';
 import LikeButton from './common/likeButton';
+import RemoveButton from './common/removeButton';
 
 const DataDetail = ({id,image,title,item}) => (
   <article className="GalleryItem">
@@ -20,6 +21,7 @@ const DataDetail = ({id,image,title,item}) => (
       <p className="GalleryItem-title">{title}</p>
     </Link>
     <LikeButton item={item}/>
+    <RemoveButton item={item}/>
   </article>
 );
 
