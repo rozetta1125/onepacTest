@@ -20,6 +20,38 @@ function DataList(props){
       break;
     default:
       FilterArray = props.collection.items;
+      console.log(FilterArray)
+      break;
+  }
+
+
+
+  switch (props.filter){
+    case 'Newest':
+      FilterArray.sort((a,b)=>{
+        return new Date(b.data[0].date_created) - new Date(a.data[0].date_created);
+      })
+      break;
+    case 'Oldest':
+      FilterArray.sort((a,b)=>{
+        return new Date(a.data[0].date_created) - new Date(b.data[0].date_created);
+      })
+      break;
+    case 'A-Z':
+      FilterArray.sort((a,b)=>{
+        if(a.data[0].title.toLowerCase() < b.data[0].title.toLowerCase()) return -1;
+        if(a.data[0].title.toLowerCase() > b.data[0].title.toLowerCase()) return 1;
+        return 0;
+      })
+    break;
+    case 'Z-A':
+      FilterArray.sort((a,b)=>{
+        if(a.data[0].title.toLowerCase() < b.data[0].title.toLowerCase()) return 1;
+        if(a.data[0].title.toLowerCase() > b.data[0].title.toLowerCase()) return -1;
+        return 0;
+      })
+    break;
+    default:
       break;
   }
 

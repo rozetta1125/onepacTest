@@ -32,17 +32,17 @@ function DataPage(){
   return (
     <>
       <h2>Data Page</h2>
-      {/* <select value={filter} onChange={handleFilter}>
+      <button value='ALL' onClick={handleCLick}>All Data</button>
+      <button value='LIKED' onClick={handleCLick}>All Liked Data</button>
+      <button value='REMOVED' onClick={handleCLick}>All Removed Data</button>
+
+      <select style={{"float":"right"}} value={filter} onChange={handleFilter}>
         <option value="Sort">Sort</option>
         <option value="Newest">Newest</option>
         <option value="Oldest">Oldest</option>
         <option value="A-Z">A-Z</option>
         <option value="Z-A">Z-A</option>
-      </select> */}
-
-      <button value='ALL' onClick={handleCLick}>All Data</button>
-      <button value='LIKED' onClick={handleCLick}>All Liked Data</button>
-      <button value='REMOVED' onClick={handleCLick}>All Removed Data</button>
+      </select>
 
       {!isBusy ? (
         <DataList collection={collection} type={type} filter={filter}/>
