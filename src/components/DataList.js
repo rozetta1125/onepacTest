@@ -5,8 +5,10 @@ import Masonry from 'react-masonry-css'
 
 
 function DataList(props){
-  console.log(props.filter,props.type)
   let FilterArray=[];
+
+  let isEmpty=false;
+
   switch (props.type) {
     case 'LIKED':
       FilterArray = props.collection.items.filter(item => {
@@ -20,11 +22,8 @@ function DataList(props){
       break;
     default:
       FilterArray = props.collection.items;
-      console.log(FilterArray)
       break;
   }
-
-
 
   switch (props.filter){
     case 'Newest':
@@ -54,9 +53,14 @@ function DataList(props){
     default:
       break;
   }
+  
+  if(FilterArray.length===0){
+    isEmpty=true;
+  }
 
   return (
     <>
+    {isEmpty ? <p>There is no result</p> : 
     <Masonry breakpointCols={3}
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column">
@@ -72,7 +76,7 @@ function DataList(props){
           />
         )
       })}
-    </Masonry>
+    </Masonry>}
     </>
   )
 }

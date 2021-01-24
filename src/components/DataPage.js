@@ -11,7 +11,9 @@ function DataPage(){
 
   useEffect(()=>{
     dataStore.addChangeListener(onChange);
-    if (dataStore.getCollection.length === 0) loadData().then(()=>setBusy(false),console.log('asdf'));
+    if (dataStore.getCollection.length === 0) loadData().then(()=>{
+      setBusy(false);
+    });
     return () => dataStore.removeChangeListener(onChange);
   },[]);
 
@@ -21,12 +23,10 @@ function DataPage(){
 
   function handleFilter(e){
     setFilter(e.target.value);
-    console.log(e.target.value)
   }
 
   function handleCLick(e){
     setType(e.target.value);
-    console.log(e.target.value)
   }
 
   return (
@@ -46,7 +46,7 @@ function DataPage(){
 
       {!isBusy ? (
         <DataList collection={collection} type={type} filter={filter}/>
-      ) : <div>Loading</div> }
+      ) : <div>Loading...</div> }
     </>
   )
 }
